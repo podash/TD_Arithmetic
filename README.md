@@ -1,1 +1,1 @@
-The 2nd lab work in GO lang
+*The 2nd lab work in GO lang*
