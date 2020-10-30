@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"os"
 	"strings"
 	lab2 "github.com/Trafle/TD_Arithmetic"
 )
@@ -16,16 +17,26 @@ var (
 
 func main() {
 	flag.Parse()
-
-	in := strings.NewReader(*inputExpression)
+	var in io.Reader
 	var out io.Writer
+
+	if *inputExpression != "" {
+		in = strings.NewReader(*inputExpression)
+	}	else if *inputFile != "" {
+		file, e := os.Open(*inputFile)
+		if e != nil {
+        fmt.Println(e)
+        return
+    }
+		in = file
+	} else { return }
 	handler := &lab2.ComputeHandler {
 		Input: in,
 		Output: out,
 	}
 	err := handler.Compute()
 
-	res, _ := &lab2.PostfixToPrefix("+ 2 2")
-	fmt.Println(err)
-	fmt.Println(res)
+	if err != nil {
+		fmt.Println(err)
+	}
 }
