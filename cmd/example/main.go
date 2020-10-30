@@ -3,25 +3,29 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
+	"strings"
 	lab2 "github.com/Trafle/TD_Arithmetic"
 )
 
 var (
 	inputExpression = flag.String("e", "", "Expression to compute")
-	// TODO: Add other flags support for input and output configuration.
+	inputFile = flag.String("f", "", "File to read input from")
+	outputFile = flag.String("o", "", "File to write output into")
 )
 
 func main() {
 	flag.Parse()
 
-	// TODO: Change this to accept input from the command line arguments as described in the task and
-	//       output the results using the ComputeHandler instance.
-	//       handler := &lab2.ComputeHandler{
-	//           Input: {construct io.Reader according the command line parameters},
-	//           Output: {construct io.Writer according the command line parameters},
-	//       }
-	//       err := handler.Compute()
+	in := strings.NewReader(*inputExpression)
+	var out io.Writer
+	handler := &lab2.ComputeHandler {
+		Input: in,
+		Output: out,
+	}
+	err := handler.Compute()
 
-	res, _ := lab2.PrefixToPostfix("+ 2 2")
+	res, _ := &lab2.PostfixToPrefix("+ 2 2")
+	fmt.Println(err)
 	fmt.Println(res)
 }
