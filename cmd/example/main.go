@@ -38,6 +38,8 @@ func main() {
         return
     }
 		out = file
+	} else {
+		out = os.Stdout
 	}
 	handler := &lab2.ComputeHandler {
 		Input: in,

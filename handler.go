@@ -2,6 +2,7 @@ package lab2
 
 import (
 	"io"
+	"io/ioutil"
 )
 
 // ComputeHandler should be constructed with input io.Reader and output io.Writer.
@@ -13,19 +14,17 @@ type ComputeHandler struct {
 
 func (ch *ComputeHandler) Compute() error {
 	// TODO: Implement.
-	buf := make([]byte, 1024)
-	for {
-		n, err := ch.Input.Read(buf)
-		if err != nil && err != io.EOF {
-			return err
-		}
-		if n == 0 { 
-			break 
-		}
-		_, err = ch.Output.Write(buf[:n])
-		if err != nil {
-			return err
-		}
+	buf, err := ioutil.ReadAll(ch.Input)
+	if err != nil && err != io.EOF {
+		return err
+	}
+	//res, err := PostfixToPrefix(string(buf))
+	//if err != nil {
+	//	return err
+	//}
+	_, err = ch.Output.Write(buf)
+	if err != nil {
+		return err
 	}
 	return nil
 }
