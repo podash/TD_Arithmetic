@@ -1,5 +1,4 @@
-// TODO: Rename to your own module.
-module github.com/roman-mazur/architecture-lab-2
+module github.com/Trafle/TD_Arithmetic
 
 go 1.15
 
