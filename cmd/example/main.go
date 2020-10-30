@@ -30,6 +30,15 @@ func main() {
     }
 		in = file
 	} else { return }
+
+	if *outputFile != "" {
+		file, e := os.Create(*outputFile)
+		if e != nil {
+        fmt.Println(e)
+        return
+    }
+		out = file
+	}
 	handler := &lab2.ComputeHandler {
 		Input: in,
 		Output: out,
