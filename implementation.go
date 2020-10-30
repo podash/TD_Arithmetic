@@ -7,6 +7,7 @@ import (
 // TODO: document this function.
 // PostfixToPrefix converts
 func StringToArray(inputS string) []string {
+	//Deconstruct the logic and create a real string to array function. Let the tests do the testing
 
 	var array []string
 	

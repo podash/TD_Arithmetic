@@ -13,7 +13,6 @@ var (
 
 func main() {
 	flag.Parse()
-
 	// TODO: Change this to accept input from the command line arguments as described in the task and
 	//       output the results using the ComputeHandler instance.
 	//       handler := &lab2.ComputeHandler{
@@ -22,6 +21,6 @@ func main() {
 	//       }
 	//       err := handler.Compute()
 
-	res, _ := lab2.PrefixToPostfix("+ 2 2")
+	res, _ := lab2.PostfixToPrefix("+ 2 2")
 	fmt.Println(res)
 }
