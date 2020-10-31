@@ -2,48 +2,18 @@ package lab2
 
 import (
 	"regexp"
-	"bytes"
+	"strings"
 )
 // TODO: document this function.
 // PostfixToPrefix converts
 func StringToArray(inputS string) []string {
-	//Deconstruct the logic and create a real string to array function. Let the tests do the testing
-
-	var array []string
-	
-	var readingOperand bool = false
-
-	for _, sym := range inputS {
-		operand, _ := regexp.MatchString("[0-9]|[a-zA-Z]", string(sym))
-		operator, _ := regexp.MatchString(`[+*^/-]`, string(sym))
-		if operand {
-			if readingOperand {
-				var buffer bytes.Buffer
-				buffer.WriteString(array[len(array) - 1]);
-				buffer.WriteString(string(sym))
-				array[len(array) - 1] = buffer.String()
-			} else {
-				array = append(array, string(sym))
-				readingOperand = true
-			}
-		}	else if string(sym) == " " {
-			readingOperand = false;
-		}	else if operator {
-			readingOperand = false;
-			array = append(array, string(sym))
-		}
-	}
-
-	return array
+	re := regexp.MustCompile("[a-zA-Z]*[0-9]+|[+*^/-]")
+	return re.FindAllString(inputS, -1)
 }
 
-
-func PostfixToPrefix(inputStr string) ([]string, error) {
-
+func PostfixToPrefix(inputStr string) (string, error) {
 	var input = StringToArray(inputStr)
-	
 	stack := make([][]string, 0)
-
 	for _, oper := range input {
 		operator, _ := regexp.MatchString(`[+*^/-]`, oper) 
 		if !operator {
@@ -57,7 +27,5 @@ func PostfixToPrefix(inputStr string) ([]string, error) {
 			stack = append(stack, newLastElement)
 		}
 	}
-
-	// return "TODO", fmt.Errorf("TODO")
-	return stack[0], nil;
+	return strings.Join(stack[0], " "), nil;
 }
