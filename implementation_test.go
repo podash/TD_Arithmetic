@@ -23,7 +23,7 @@ func (s *TestSuite) TestPostfixToPrefix (c *C) {
 
 	for postfix, expected := range examples {
 		res, err := PostfixToPrefix(postfix)
-		if err != nil {s
+		if err != nil {
 			c.Assert(err, ErrorMatches, expected)
 		} else {
 			c.Assert(res, Equals, expected)
