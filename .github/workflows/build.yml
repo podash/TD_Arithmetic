@@ -33,3 +33,4 @@ jobs:
         run: |
           go vet
           go test
+        continue-on-error: false
