@@ -18,12 +18,12 @@ func (s *TestSuite) TestPostfixToPrefix (c *C) {
 		"hello expression": "too many operators",
 		"9.007 765.9999994 + 56 ^ /": "too many operators",
 		"": "invalid input expression",
-		"4 2 - 3 * 5+": "+ 5 * - 4 2 3",
+		"4 2 - 3 * 5+": "+ * - 4 2 3 5",
 	}
 
 	for postfix, expected := range examples {
 		res, err := PostfixToPrefix(postfix)
-		if err != nil {
+		if err != nil {s
 			c.Assert(err, ErrorMatches, expected)
 		} else {
 			c.Assert(res, Equals, expected)
