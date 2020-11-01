@@ -3,21 +3,41 @@ package lab2
 import (
 	"fmt"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
+	. "gopkg.in/check.v1"
 )
 
-func TestPostfixToPrefix(t *testing.T) {
-	res, err := PostfixToPrefix("+ 5 * - 4 2 3")
-	if assert.Nil(t, err) {
-		assert.Equal(t, "4 2 - 3 * 5 +", res)
+func TestImplementation (t *testing.T) { TestingT(t) }
+
+func (s *TestSuite) TestPostfixToPrefix (c *C) {
+	examples := map[string]string {
+		"2 45 + 6 + 24 +": "+ + + 2 45 6 24",
+		"60000321 764 +": "+ 60000321 764",
+		"26 89 13 +": "too many operands",
+		"98 4 * 234 12 * +": "+ * 98 4 * 234 12",
+		"hello expression": "invalid input expression",
+		"9.007 765.9999994 + 56 ^ /": "too many operators",
+		"": "invalid input expression",
+		"4 2 - 3 * 5+": "+ 5 * - 4 2 3",
+	}
+
+	for postfix, expected := range examples {
+		res, err := PostfixToPrefix(postfix)
+		if err != nil {
+			c.Assert(err, ErrorMatches, expected)
+		} else {
+			c.Assert(res, Equals, expected)
+		}
 	}
 }
 
 func ExamplePostfixToPrefix() {
-	res, _ := PostfixToPrefix("+ 2 2")
-	fmt.Println(res)
+	res, err := PostfixToPrefix("34 5 +")
+	if err != nil {
+		panic(err)
+	} else {
+		fmt.Println(res)
+	}
 
 	// Output:
-	// 2 2 +
+	// + 34 5
 }
