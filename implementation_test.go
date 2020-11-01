@@ -7,6 +7,7 @@ import (
 )
 
 func TestImplementation (t *testing.T) { TestingT(t) }
+type TestSuite struct{}
 
 func (s *TestSuite) TestPostfixToPrefix (c *C) {
 	examples := map[string]string {
