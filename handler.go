@@ -15,14 +15,15 @@ type ComputeHandler struct {
 func (ch *ComputeHandler) Compute() error {
 	// TODO: Implement.
 	buf, err := ioutil.ReadAll(ch.Input)
+	
 	if err != nil && err != io.EOF {
 		return err
 	}
-	//res, err := PostfixToPrefix(string(buf))
-	//if err != nil {
-	//	return err
-	//}
-	_, err = ch.Output.Write(buf)
+	res, err := PostfixToPrefix(string(buf))
+	if err != nil {
+		return err
+	}
+	_, err = ch.Output.Write([]byte(res))
 	if err != nil {
 		return err
 	}
