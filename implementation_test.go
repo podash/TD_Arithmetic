@@ -15,7 +15,7 @@ func (s *TestSuite) TestPostfixToPrefix (c *C) {
 		"60000321 764 +": "+ 60000321 764",
 		"26 89 13 +": "too many operands",
 		"98 4 * 234 12 * +": "+ * 98 4 * 234 12",
-		"hello expression": "invalid input expression",
+		"hello expression": "too many operators",
 		"9.007 765.9999994 + 56 ^ /": "too many operators",
 		"": "invalid input expression",
 		"4 2 - 3 * 5+": "+ 5 * - 4 2 3",
