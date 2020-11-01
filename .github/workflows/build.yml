@@ -21,9 +21,9 @@ jobs:
         run: rm -rf out
 
       - name: Build
-				run: mkdir -p out
-	      run: go build -o out/example ./cmd/example
+	run: mkdir -p out
+	run: go build -o out/example ./cmd/example
 
       - name: Test
-	      run: go vet 
-	      run: go test
+	run: go vet 
+	run: go test
