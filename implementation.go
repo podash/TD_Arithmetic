@@ -3,20 +3,41 @@ package lab2
 import (
 	"regexp"
 	"strings"
+	"fmt"
 )
 // TODO: document this function.
 // PostfixToPrefix converts
 func StringToArray(inputS string) []string {
-	re := regexp.MustCompile("[a-zA-Z]*[0-9]+|[+*^/-]")
+	re := regexp.MustCompile(`([0-9]\.*[0-9]*)+|[+*^/-]`)
 	return re.FindAllString(inputS, -1)
 }
 
+
+
 func PostfixToPrefix(inputStr string) (string, error) {
+	operator := regexp.MustCompile("[+*^/-]")
+	badSigns, _ := regexp.MatchString(`[!@#$%&;'\/,]`, inputStr) 
+	if badSigns || len(inputStr) == 0 {return "", fmt.Errorf("invalid input expression")}
+
+	
 	var input = StringToArray(inputStr)
+
+	operandCounter := 0
+	operatorCounter := 0
+
+	for _, e := range input {
+		if operator.MatchString(e) {
+			operatorCounter++
+		} else { operandCounter++ }
+	}
+
+	if operandCounter - 1 > operatorCounter {
+		return "", fmt.Errorf("too many operands")
+	} else if operandCounter - 1 < operatorCounter { return "", fmt.Errorf("too many operators")}
+
 	stack := make([][]string, 0)
 	for _, oper := range input {
-		operator, _ := regexp.MatchString(`[+*^/-]`, oper) 
-		if !operator {
+		if !operator.MatchString(oper) {
 			stack = append(stack, []string{oper})
 		} else {
 			op1 := stack[len(stack) - 1]
