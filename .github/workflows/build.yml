@@ -27,8 +27,5 @@ jobs:
     run: go build -o out/example ./cmd/example
      
     -name: Test
-    	run: go vet
-	run: go test
-    
-
-      
+    run: go vet
+    run: go test
