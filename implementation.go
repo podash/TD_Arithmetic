@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 // TODO: document this function.
-// PostfixToPrefix converts
+
 func StringToArray(inputS string) []string {
 	re := regexp.MustCompile(`([0-9]\.*[0-9]*)+|[+*^/-]`)
 	return re.FindAllString(inputS, -1)
